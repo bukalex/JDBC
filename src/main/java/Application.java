@@ -9,13 +9,14 @@ public class Application {
         try (final Connection connection = DriverManager.getConnection(url, user, password)){
              EmployeeDAO employeeDAO = new EmployeeDAOImpl(connection);
 
-            Employee employee = new Employee("Alexey", "Gurylev", "Male", 18, 1);
-            //employeeDAO.addEmployee(employee);
-            //System.out.println(employeeDAO.getAllEmployees().toString());
-            //System.out.println(employeeDAO.getByID(4).getAge());
-            //employeeDAO.deleteByID(6);
-            //System.out.println(employeeDAO.getAllEmployees().toString());
-            employeeDAO.editEmployeeByID(2, new Employee("Имя", "Фамилия", "Male", 1, 2));
+            Employee employee = new Employee("Alexey", "Gurylev", "Male", 19, 1);
+
+            employeeDAO.addEmployee(employee);
+            System.out.println(employeeDAO.getAllEmployees().toString());
+            System.out.println(employeeDAO.getByID(4).getAge());
+            employeeDAO.deleteByID(5);
+            System.out.println(employeeDAO.getAllEmployees().toString());
+            //employeeDAO.editEmployeeByID(new Employee("Alexey", "Gurylev", "Male", 19, 2));
         }
     }
 }

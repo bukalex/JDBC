@@ -4,6 +4,6 @@ public interface EmployeeDAO {
     void addEmployee(Employee employee);
     Employee getByID(int id);
     ArrayList<Employee> getAllEmployees();
-    void editEmployeeByID(int id, Employee employee);
+    void editEmployeeByID(Employee employee);
     void deleteByID(int id);
 }
