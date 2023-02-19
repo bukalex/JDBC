@@ -1,3 +1,7 @@
+import DAO.EmployeeDAO;
+import DAO.EmployeeDAOImpl;
+import Models.Employee;
+
 import java.sql.*;
 
 public class Application {
@@ -16,7 +20,7 @@ public class Application {
             System.out.println(employeeDAO.getByID(4).getAge());
             employeeDAO.deleteByID(5);
             System.out.println(employeeDAO.getAllEmployees().toString());
-            //employeeDAO.editEmployeeByID(new Employee("Alexey", "Gurylev", "Male", 19, 2));
+            //employeeDAO.editEmployeeByID(new Model.Employee("Alexey", "Gurylev", "Male", 19, 2));
         }
     }
 }

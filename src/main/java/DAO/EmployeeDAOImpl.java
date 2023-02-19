@@ -1,10 +1,11 @@
+package DAO;
+
+import Models.Employee;
+import Utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -29,7 +30,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public ArrayList<Employee> getAllEmployees(){
-        ArrayList<Employee> employees = (ArrayList<Employee>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Employee").list();
+        ArrayList<Employee> employees = (ArrayList<Employee>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Models.Employee").list();
         return employees;
     }
 
