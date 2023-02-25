@@ -20,6 +20,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             Transaction transaction = session.beginTransaction();
             session.save(employee);
             transaction.commit();
+            session.close();
         }
     }
 
@@ -40,6 +41,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             Transaction transaction = session.beginTransaction();
             session.update(employee);
             transaction.commit();
+            session.close();
         }
     }
 
@@ -49,6 +51,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             Transaction transaction = session.beginTransaction();
             session.save(getByID(id));
             transaction.commit();
+            session.close();
         }
     }
 }

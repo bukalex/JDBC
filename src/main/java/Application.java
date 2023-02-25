@@ -1,5 +1,8 @@
+import DAO.CityDAO;
+import DAO.CityDAOImpl;
 import DAO.EmployeeDAO;
 import DAO.EmployeeDAOImpl;
+import Models.City;
 import Models.Employee;
 
 import java.sql.*;
@@ -11,16 +14,24 @@ public class Application {
         final String url = "jdbc:postgresql://localhost:5432/skypro";
 
         try (final Connection connection = DriverManager.getConnection(url, user, password)){
-             EmployeeDAO employeeDAO = new EmployeeDAOImpl(connection);
+            EmployeeDAO employeeDAO = new EmployeeDAOImpl(connection);
+            CityDAO cityDAO = new CityDAOImpl(connection);
 
             Employee employee = new Employee("Alexey", "Gurylev", "Male", 19, 1);
+            City city = new City("Rostov");
 
-            employeeDAO.addEmployee(employee);
+            /*employeeDAO.addEmployee(employee);
             System.out.println(employeeDAO.getAllEmployees().toString());
             System.out.println(employeeDAO.getByID(4).getAge());
             employeeDAO.deleteByID(5);
             System.out.println(employeeDAO.getAllEmployees().toString());
-            //employeeDAO.editEmployeeByID(new Model.Employee("Alexey", "Gurylev", "Male", 19, 2));
+            employeeDAO.editEmployeeByID(new Employee("Alexey", "Gurylev", "Male", 19, 2));*/
+
+            cityDAO.addCity(city);
+            System.out.println(cityDAO.getAllCities().toString());
+            System.out.println(cityDAO.getByID(4).toString());
+            cityDAO.deleteByID(2);
+            System.out.println(cityDAO.getAllCities().toString());
         }
     }
 }

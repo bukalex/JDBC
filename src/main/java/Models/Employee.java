@@ -25,6 +25,9 @@ public class Employee {
     @Column(name = "city_id")
     private int cityID;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private City city;
+
     public Employee(){
 
     }
