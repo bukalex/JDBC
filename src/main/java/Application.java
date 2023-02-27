@@ -1,3 +1,10 @@
+import DAO.CityDAO;
+import DAO.CityDAOImpl;
+import DAO.EmployeeDAO;
+import DAO.EmployeeDAOImpl;
+import Models.City;
+import Models.Employee;
+
 import java.sql.*;
 
 public class Application {
@@ -6,24 +13,26 @@ public class Application {
         final String password = "Olga2703";
         final String url = "jdbc:postgresql://localhost:5432/skypro";
 
-        try (final Connection connection = DriverManager.getConnection(url, user, password);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM employee WHERE id = (?)")) {
-            statement.setInt(1, 6);
-            final ResultSet resultSet = statement.executeQuery();
+        try (final Connection connection = DriverManager.getConnection(url, user, password)){
+            EmployeeDAO employeeDAO = new EmployeeDAOImpl(connection);
+            CityDAO cityDAO = new CityDAOImpl(connection);
 
-            while (resultSet.next()) {
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String gender = resultSet.getString("gender");
-                String age = resultSet.getString("age");
-                String cityID = resultSet.getString("city_id");
+            Employee employee = new Employee("Alexey", "Gurylev", "Male", 19, 1);
+            City city = new City("Rostov");
 
-                System.out.println("first_name: " + firstName);
-                System.out.println("last_name: " + lastName);
-                System.out.println("gender: " + gender);
-                System.out.println("age: " + age);
-                System.out.println("city_id: " + cityID);
-            }
+            /*employeeDAO.addEmployee(employee);
+            System.out.println(employeeDAO.getAllEmployees().toString());
+            System.out.println(employeeDAO.getByID(4).getAge());
+            employeeDAO.deleteByID(5);
+            System.out.println(employeeDAO.getAllEmployees().toString());
+            employeeDAO.editEmployee(new Employee("Alexey", "Gurylev", "Male", 19, 2));*/
+
+            cityDAO.addCity(city);
+            System.out.println(cityDAO.getAllCities().toString());
+            System.out.println(cityDAO.getByID(3).toString());
+            cityDAO.deleteByID(6);
+            System.out.println(cityDAO.getAllCities().toString());
+            cityDAO.editCity(new City("Rostov"));
         }
     }
 }
