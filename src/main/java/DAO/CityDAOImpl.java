@@ -1,13 +1,12 @@
 package DAO;
 
 import Models.City;
-import Models.Employee;
 import Utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.util.List;
 
 public class CityDAOImpl implements CityDAO{
     private final Connection connection;
@@ -21,28 +20,38 @@ public class CityDAOImpl implements CityDAO{
             Transaction transaction = session.beginTransaction();
             session.save(city);
             transaction.commit();
-            session.close();
         }
     }
 
     @Override
     public City getByID(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(City.class, id);
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.get(City.class, id);
+        }
     }
 
     @Override
-    public ArrayList<City> getAllCities() {
-        ArrayList<City> cities = (ArrayList<City>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Models.City").list();
-        return cities;
+    public List<City> getAllCities() {
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.createQuery("From Models.City", City.class).list();
+        }
+    }
+
+    @Override
+    public void editCity(City city) {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()){
+            Transaction transaction = session.beginTransaction();
+            session.update(city);
+            transaction.commit();
+        }
     }
 
     @Override
     public void deleteByID(int id) {
-        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();) {
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.save(getByID(id));
+            session.remove(getByID(id));
             transaction.commit();
-            session.close();
         }
     }
 }

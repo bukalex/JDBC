@@ -2,11 +2,12 @@ package DAO;
 
 import Models.City;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CityDAO {
     void addCity(City city);
     City getByID(int id);
-    ArrayList<City> getAllCities();
+    List<City> getAllCities();
+    void editCity(City city);
     void deleteByID(int id);
 }

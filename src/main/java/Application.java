@@ -25,13 +25,14 @@ public class Application {
             System.out.println(employeeDAO.getByID(4).getAge());
             employeeDAO.deleteByID(5);
             System.out.println(employeeDAO.getAllEmployees().toString());
-            employeeDAO.editEmployeeByID(new Employee("Alexey", "Gurylev", "Male", 19, 2));*/
+            employeeDAO.editEmployee(new Employee("Alexey", "Gurylev", "Male", 19, 2));*/
 
             cityDAO.addCity(city);
             System.out.println(cityDAO.getAllCities().toString());
-            System.out.println(cityDAO.getByID(4).toString());
-            cityDAO.deleteByID(2);
+            System.out.println(cityDAO.getByID(3).toString());
+            cityDAO.deleteByID(6);
             System.out.println(cityDAO.getAllCities().toString());
+            cityDAO.editCity(new City("Rostov"));
         }
     }
 }
